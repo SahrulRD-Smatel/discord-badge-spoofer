@@ -2,14 +2,14 @@
 """
 discord science spoofer - inflate the playtime and games-played badges.
 
-revere group, 2026. mit licensed (see LICENSE).
+SahrulRD-Smatel, 2026. mit licensed (see LICENSE).
 
 posts launch_game and running_game_heartbeat events to /api/v9/science, the same
 endpoint the real client uses to credit playtime. duration_tracked_ms isn't
 validated so any number goes straight through.
 
 run:
-    python spoofer.py
+    rdiscord.py
 
 auth bits:
     token            your account token, entered on first run           [saved]
