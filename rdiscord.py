@@ -9,7 +9,7 @@ endpoint the real client uses to credit playtime. duration_tracked_ms isn't
 validated so any number goes straight through.
 
 run:
-    rdiscord.py
+    python rdiscord.py
 
 auth bits:
     token            your account token, entered on first run           [saved]
@@ -344,7 +344,7 @@ class Console:
         self.clear()
         print()
         print(f"  {self.ORANGE}spoofer{self.RESET} {self.GREY}·{self.RESET} {self.WHITE}discord badges{self.RESET}")
-        print(f"    {self.GREY}by revere group{self.RESET}")
+        print(f"    {self.GREY}by SahrulRD-Smatel{self.RESET}")
         print()
 
 
