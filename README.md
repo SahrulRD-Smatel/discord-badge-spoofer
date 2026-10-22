@@ -55,8 +55,8 @@ Unlike typical open-source spoofer scripts that store plain-text tokens or injec
 
 | Module | Badge Target | Protocol Events Emulated |
 |---|---|---|
-| [`rdiscord.py`](rdiscord.py) | 🎮 **Game Time** & **Game Variety** | `running_game_heartbeat` (initial) ➔ `launch_game` ➔ `running_game_heartbeat` (final) |
-| [`rstream.py`](rstream.py) | 📺 **Streaming** (Go Live Hours) | `stream_start` ➔ `stream_end` (with real server snowflakes) |
+| [`rdiscord.py`](rdiscord.py) | 🗡️ **Game Time** (Playtime) & 🎮 **Game Variety** (Unique Games) | `running_game_heartbeat` (initial) ➔ `launch_game` ➔ `running_game_heartbeat` (final) |
+| [`rstream.py`](rstream.py) | 🖥️ **Streaming** (Go Live Hours) | `stream_start` ➔ `stream_end` (with real server snowflakes) |
 
 - **🛡️ OS-Bound Cryptographic Vault**: Credentials (`token`, `cookie`, `fingerprint`, `analytics_token`) are encrypted with Windows DPAPI before hitting disk.
 - **⚡ Batch Pipeline Processing**: Chunked telemetry ingestion (`BATCH_SIZE = 50`) optimized for Discord's analytics throughput.
@@ -156,34 +156,57 @@ All credentials are saved locally in encrypted form into [`science_state.json`](
 
 ---
 
-## 🏆 Badge Tier Reference
+## 🏆 Official Discord Badge Tier Reference
 
-### 🎮 Game Time Badges
+Data hierarchy verified directly from Discord's client UI:
 
-| Required Playtime | Badge Title | Visual Tier |
+### 🗡️ Game Time Badges (`rdiscord.py`)
+> *Tracked by accumulating hours in detectable PC games with Discord open.*
+
+| Required Playtime | Badge Title | Visual Tier / Color |
 |---:|:---|:---|
-| **1 Hour** | Newcomer | Bronze Base |
-| **15 Hours** | Just Starting | Bronze II |
-| **50 Hours** | Making Progress | Silver I |
-| **100 Hours** | Getting Serious | Silver II |
-| **250 Hours** | Dedicated | Gold I |
-| **500 Hours** | Hardcore | Platinum |
-| **1,000 Hours** | Committed | Diamond / Radiant |
+| **1 Hour** | **Casual** | ⚪ Grey Sword |
+| **5 Hours** | **Recreational** | 🟢 Light Green Sword |
+| **20 Hours** | **Dedicated** | 🟢 Green Sword |
+| **75 Hours** | **Committed** | 🔵 Cyan Sword |
+| **150 Hours** | **Serious** | 🟦 Teal Sword |
+| **300 Hours** | **Devoted** | 🟦 Blue Sword |
+| **500 Hours** | **Seasoned** | 🟣 Purple Sword (Rare) |
+| **1,000 Hours** | **Ironclad** | 🟣 Magenta Sword |
+| **2,000 Hours** | **Unshakeable** | 🔴 Red Sword |
+| **5,000+ Hours** | **Eternal** | 🟡 Gold Sword |
 
-### 📺 Streaming Badges (Go Live)
+### 🎮 Game Variety Badges (`rdiscord.py`)
+> *Tracked by launching multiple unique detectable PC games.*
 
-| Required Stream Hours | Badge Title |
-|---:|:---|
-| **1 Hour** | Newcomer |
-| **5 Hours** | Fledgling |
-| **20 Hours** | Breakout |
-| **75 Hours** | Standout |
-| **150 Hours** | Trendsetter |
-| **300 Hours** | Headliner |
-| **500 Hours** | Star |
-| **1,000 Hours** | Sensation |
-| **2,000 Hours** | Visionary |
-| **5,000 Hours** | Phenomenon |
+| Unique Games Played | Badge Title | Visual Tier / Color |
+|---:|:---|:---|
+| **2 Games** | **Sampler** | ⚪ Grey Controller |
+| **5 Games** | **Dabbler** | 🟢 Light Green Controller |
+| **10 Games** | **Enthusiast** | 🟢 Green Controller |
+| **15 Games** | **Ranger** | 🔵 Cyan Controller |
+| **20 Games** | **Explorer** | 🟦 Teal Controller |
+| **30 Games** | **Adventurer** | 🟦 Blue Controller |
+| **40 Games** | **Voyager** | 🟣 Purple Controller |
+| **60 Games** | **Maverick** | 🟣 Magenta Controller |
+| **80 Games** | **Polymath** | 🔴 Red Controller |
+| **100+ Games** | **Universalist** | 🟡 Gold Controller |
+
+### 🖥️ Streaming Badges (`rstream.py`)
+> *Tracked by streaming (Go Live) to other users in voice channels.*
+
+| Required Stream Hours | Badge Title | Visual Tier / Color |
+|---:|:---|:---|
+| **1 Hour** | **Newcomer** | ⚪ Grey Monitor |
+| **5 Hours** | **Fledgling** | 🟢 Light Green Monitor |
+| **20 Hours** | **Breakout** | 🟢 Green Monitor |
+| **75 Hours** | **Standout** | 🔵 Cyan Monitor |
+| **150 Hours** | **Trendsetter** | 🟦 Teal Monitor |
+| **300 Hours** | **Headliner** | 🟦 Blue Monitor |
+| **500 Hours** | **Star** | 🟣 Purple Monitor |
+| **1,000 Hours** | **Sensation** | 🟣 Magenta Monitor |
+| **2,000 Hours** | **Visionary** | 🔴 Red Monitor |
+| **5,000+ Hours** | **Phenomenon** | 🟡 Gold Monitor |
 
 ---
 
