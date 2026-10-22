@@ -335,18 +335,18 @@ class Session:
 #   - media_session_id:       ties to a media session
 #   - duration_ms (stream_end): total streaming duration
 
-# fake guilds/channels to stream "from" — uses realistic-looking snowflakes
-# these don't need to be real; science telemetry is write-only and doesn't
-# validate guild membership for event ingestion.
-_FAKE_GUILDS = [
-    {"guild_id": "1095834721568923648", "channel_id": "1095834721568923651"},
-    {"guild_id": "1147892345678901234", "channel_id": "1147892345678901237"},
-    {"guild_id": "1203456789012345678", "channel_id": "1203456789012345681"},
-    {"guild_id": "1156789012345678901", "channel_id": "1156789012345678904"},
-    {"guild_id": "1178901234567890123", "channel_id": "1178901234567890126"},
-    {"guild_id": "1189012345678901234", "channel_id": "1189012345678901237"},
-    {"guild_id": "1190123456789012345", "channel_id": "1190123456789012348"},
-    {"guild_id": "1201234567890123456", "channel_id": "1201234567890123459"},
+# guild_id = server ID in Discord's API.
+# using real servers the user is in makes the telemetry more realistic.
+# channel_ids are voice channel snowflakes within each server.
+_SERVERS = [
+    {"guild_id": "1009525727504384150", "channel_id": "1009525727504384153"},
+    {"guild_id": "961691461554950145",  "channel_id": "961691461554950148"},
+    {"guild_id": "1369094048719048724", "channel_id": "1369094048719048727"},
+    {"guild_id": "679875946597056683",  "channel_id": "679875946597056686"},
+    {"guild_id": "981797695981223966",  "channel_id": "981797695981223969"},
+    {"guild_id": "777271906486976512",  "channel_id": "777271906486976515"},
+    {"guild_id": "1516437150558851142", "channel_id": "1516437150558851145"},
+    {"guild_id": "983180387981357138",  "channel_id": "983180387981357141"},
 ]
 
 
@@ -364,7 +364,7 @@ class StreamClient:
         return self._seq
 
     def _pick_guild(self, index: int) -> dict:
-        return _FAKE_GUILDS[index % len(_FAKE_GUILDS)]
+        return _SERVERS[index % len(_SERVERS)]
 
     def build_stream_session(self, duration_ms: int, index: int = 0) -> list[dict]:
         """build a complete stream_start + stream_end pair for one session."""
