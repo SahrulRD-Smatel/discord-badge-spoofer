@@ -58,6 +58,7 @@ Unlike typical open-source spoofer scripts that store plain-text tokens or injec
 | [`rdiscord.py`](rdiscord.py) | 🗡️ **Game Time** (Playtime) & 🎮 **Game Variety** (Unique Games) | `running_game_heartbeat` ➔ `launch_game` ➔ `running_game_heartbeat` |
 | [`rstream.py`](rstream.py) | 🖥️ **Streaming** (Go Live Hours) | `stream_start` ➔ `stream_end` (with real server snowflakes) |
 | [`hypesquad.js`](hypesquad.js) | 💜 **HypeSquad Houses** (Bravery / Brilliance / Balance) | Direct DevTools Console REST injection (`POST /hypesquad/online`) |
+| [`valorant_rpc.py`](valorant_rpc.py) | 👑 **VALORANT Radiant Rank Card** (Top 500 & RR) | Local Named Pipe IPC (`SET_ACTIVITY` via `\\.\pipe\discord-ipc-0`) |
 
 - **🛡️ OS-Bound Cryptographic Vault**: Credentials (`token`, `cookie`, `fingerprint`, `analytics_token`) are encrypted with Windows DPAPI before hitting disk.
 - **⚡ Batch Pipeline Processing**: Chunked telemetry ingestion (`BATCH_SIZE = 50`) optimized for Discord's analytics throughput.
@@ -175,6 +176,34 @@ Unlike game and streaming telemetry which require backend batch processing delay
 
 ---
 
+## 👑 VALORANT Radiant Rank RPC Spoofer (`valorant_rpc.py`)
+
+Display real-time **Radiant / Immortal** rank, dynamic live match score progression (`0-0` ➔ `13`), active competitive map pool rotation, and auto-updating RR directly on your Discord profile game card!
+
+### 🎯 Dynamic Match Simulation Engine:
+- **Skor Dinamis Realistis**: Ronde berjalan bertahap dari `0-0`, `1-0`, `1-1`, hingga `13` poin (termasuk skenario overtime `14-12`).
+- **Siklus Hidup Match Otomatis**: `In Match` ➔ `Victory / Defeat Screen` ➔ `In Lobby (In Queue)` ➔ `Agent Select` ➔ `Next Match`.
+- **Filter Map Kompetitif Aktif**: Hanya memilih dari **7 map aktif Ranked** (`Ascent`, `Bind`, `Haven`, `Lotus`, `Sunset`, `Abyss`), menghindari map yang sedang di-patch/keluar dari rotasi.
+- **Auto RR Progression**: RR bertambah dinamis saat menang (+18 hingga +24 RR) dan berkurang wajar saat kalah.
+- **Mobile-Clean**: Teks ringkas (Baris 1: `Radiant (845 RR)`, Baris 2: `Ascent (7-5) (5 of 5)`), pas di box Discord HP tanpa terpotong!
+
+### Quick Start:
+```bash
+# 1. Mode Realistis (Ronde bertambah ~90 detik, match ~30 menit, persis seperti main asli):
+py valorant_rpc.py
+
+# 2. Mode Realistis Langsung Mulai Pertengahan Match (Skor ~5-3):
+py valorant_rpc.py --start-mid
+
+# 3. Mode Cepat / Demo Testing (Skor bertambah tiap 8-10 detik untuk demonstrasi cepat):
+py valorant_rpc.py --fast
+
+# Kunci Agent Tertentu (opsional):
+py valorant_rpc.py --agent Jett
+```
+
+---
+
 ## 🏆 Official Discord Badge Tier Reference
 
 Data hierarchy verified directly from Discord's client UI:
@@ -264,6 +293,7 @@ discord-badge-spoofer/
 ├── rdiscord.py          # Primary game playtime & game variety telemetry spoofer
 ├── rstream.py           # Go Live voice/stream session telemetry spoofer
 ├── hypesquad.js         # Instant DevTools console script for HypeSquad badge
+├── valorant_rpc.py      # VALORANT Radiant rank & live match Discord RPC card
 ├── science_state.json   # DPAPI-encrypted credential store & telemetry cache
 ├── .gitignore           # Git ignore rules for clean repository hygiene
 ├── LICENSE              # MIT Open Source License
