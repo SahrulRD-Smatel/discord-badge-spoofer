@@ -1,5 +1,6 @@
 # local state
 science_state.json
+active_bot.json
 
 # python
 __pycache__/

@@ -55,8 +55,9 @@ Unlike typical open-source spoofer scripts that store plain-text tokens or injec
 
 | Module | Badge Target | Protocol Events Emulated |
 |---|---|---|
-| [`rdiscord.py`](rdiscord.py) | 🗡️ **Game Time** (Playtime) & 🎮 **Game Variety** (Unique Games) | `running_game_heartbeat` (initial) ➔ `launch_game` ➔ `running_game_heartbeat` (final) |
+| [`rdiscord.py`](rdiscord.py) | 🗡️ **Game Time** (Playtime) & 🎮 **Game Variety** (Unique Games) | `running_game_heartbeat` ➔ `launch_game` ➔ `running_game_heartbeat` |
 | [`rstream.py`](rstream.py) | 🖥️ **Streaming** (Go Live Hours) | `stream_start` ➔ `stream_end` (with real server snowflakes) |
+| [`hypesquad.js`](hypesquad.js) | 💜 **HypeSquad Houses** (Bravery / Brilliance / Balance) | Direct DevTools Console REST injection (`POST /hypesquad/online`) |
 
 - **🛡️ OS-Bound Cryptographic Vault**: Credentials (`token`, `cookie`, `fingerprint`, `analytics_token`) are encrypted with Windows DPAPI before hitting disk.
 - **⚡ Batch Pipeline Processing**: Chunked telemetry ingestion (`BATCH_SIZE = 50`) optimized for Discord's analytics throughput.
@@ -156,6 +157,24 @@ All credentials are saved locally in encrypted form into [`science_state.json`](
 
 ---
 
+## 💜 HypeSquad House Claimer (`hypesquad.js`)
+
+Unlike game and streaming telemetry which require backend batch processing delays, the **HypeSquad House Badge** can be claimed or switched **instantly** without taking the in-app quiz:
+
+### Quick Instructions:
+1. Open Discord in your Desktop App or Web Browser (`discord.com/app`).
+2. Press **`F12`** (or `Ctrl + Shift + I`) to open Developer Tools and switch to the **Console** tab.
+3. If prompted by Discord, type `allow pasting` and press Enter.
+4. Copy the script from [`hypesquad.js`](hypesquad.js) (or the compact snippet below), set your desired house ID, and press Enter:
+
+```javascript
+// House IDs: 1 = Bravery (Purple 💜) | 2 = Brilliance (Red ❤️) | 3 = Balance (Teal 💚)
+(async (h=1)=>{const w=window.webpackChunkdiscord_app.push([[Symbol()],{},r=>r]);window.webpackChunkdiscord_app.pop();const m=w.m,c=w.c;const f=s=>{for(const[i,o]of Object.entries(m))if(o.toString().includes(s))return c[i]?.exports};const k=(e,p)=>{if(!e)return null;for(const x in e)if(e[x]&&e[x][p])return e[x];return null};const api=k(f('.set("X-Audit-Log-Reason",'),"patch");if(!api?.post)return console.error("API client not found");await api.post({url:"/hypesquad/online",body:{house_id:h}});console.log("✅ HypeSquad badge updated! Press Ctrl+R to refresh.")})(1);
+```
+5. Press **`Ctrl + R`** to immediately view your new badge!
+
+---
+
 ## 🏆 Official Discord Badge Tier Reference
 
 Data hierarchy verified directly from Discord's client UI:
@@ -244,6 +263,7 @@ Data hierarchy verified directly from Discord's client UI:
 discord-badge-spoofer/
 ├── rdiscord.py          # Primary game playtime & game variety telemetry spoofer
 ├── rstream.py           # Go Live voice/stream session telemetry spoofer
+├── hypesquad.js         # Instant DevTools console script for HypeSquad badge
 ├── science_state.json   # DPAPI-encrypted credential store & telemetry cache
 ├── .gitignore           # Git ignore rules for clean repository hygiene
 ├── LICENSE              # MIT Open Source License
